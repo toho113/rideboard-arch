@@ -39,7 +39,7 @@ variable "linux_os_version" {
 }
 
 variable "instance_shape" {
-  default = "VM.Standard.E3.Flex"
+  default = "VM.Standard.A3.Flex"
 }
 
 variable "instance_flex_shape_ocpus" {
@@ -47,7 +47,7 @@ variable "instance_flex_shape_ocpus" {
 }
 
 variable "instance_flex_shape_memory" {
-  default = 10
+  default = 6
 }
 
 variable "ssh_public_key" {
@@ -63,7 +63,7 @@ variable "flex_lb_min_shape" {
 }
 
 variable "flex_lb_max_shape" {
-  default = "100"
+  default = "10"
 }
 
 variable "ATP_private_endpoint" {
@@ -71,7 +71,7 @@ variable "ATP_private_endpoint" {
 }
 
 variable "ATP_free_tier" {
-  default = false
+  default = true
 }
 
 variable "ATP_database_cpu_core_count" {
