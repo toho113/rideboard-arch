@@ -138,7 +138,7 @@ resource "oci_autoscaling_auto_scaling_configuration" "autoscaling_configuration
     display_name = "Threshold_AutoScaling_Configuration_Policies"
     capacity {
       initial = "2"
-      max     = "4"
+      max     = "6"
       min     = "2"
     }
     policy_type = "threshold"
@@ -152,7 +152,7 @@ resource "oci_autoscaling_auto_scaling_configuration" "autoscaling_configuration
         metric_type = "CPU_UTILIZATION"
         threshold {
           operator = "GT"
-          value    = "80"
+          value    = "50"
         }
       }
     }
@@ -174,4 +174,11 @@ resource "oci_autoscaling_auto_scaling_configuration" "autoscaling_configuration
   cool_down_in_seconds = "300"
   display_name         = "Threshold_AutoScaling_Configuration"
   defined_tags         = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
+}
+
+# Attaches an instance to an instance pool
+resource "oci_core_instance_pool_instance" "attach_instance_pool_instance" {
+    #Required
+    instance_id = oci_core_instance.compute_instance1.id 
+    instance_pool_id = oci_core_instance_pool.instance_pool.id
 }

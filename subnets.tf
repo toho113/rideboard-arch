@@ -5,7 +5,7 @@
 
 resource "oci_core_subnet" "subnet_1" {
   cidr_block      = "10.0.0.0/24"
-  display_name    = "subnet-A"
+  display_name    = "subnet-pub-LB"
   compartment_id  = var.compartment_ocid
   vcn_id          = oci_core_virtual_network.vcn.id
   dhcp_options_id = oci_core_virtual_network.vcn.default_dhcp_options_id
@@ -20,7 +20,7 @@ resource "oci_core_subnet" "subnet_1" {
 
 resource "oci_core_subnet" "subnet_2" {
   cidr_block      = "10.0.1.0/24"
-  display_name    = "subnet-B"
+  display_name    = "subnet-pub-WEBVM"
   compartment_id  = var.compartment_ocid
   vcn_id          = oci_core_virtual_network.vcn.id
   dhcp_options_id = oci_core_virtual_network.vcn.default_dhcp_options_id
@@ -34,7 +34,7 @@ resource "oci_core_subnet" "subnet_2" {
 
 resource "oci_core_subnet" "subnet_3" {
   cidr_block                 = "10.0.2.0/24"
-  display_name               = "subnet-C"
+  display_name               = "subnet-priv-DB"
   compartment_id             = var.compartment_ocid
   vcn_id                     = oci_core_virtual_network.vcn.id
   dhcp_options_id            = oci_core_virtual_network.vcn.default_dhcp_options_id
