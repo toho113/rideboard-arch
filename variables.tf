@@ -39,7 +39,7 @@ variable "linux_os_version" {
 }
 
 variable "instance_shape" {
-  default = "VM.Standard.A3.Flex"
+  default = "VM.Standard.A1.Flex"
 }
 
 variable "instance_flex_shape_ocpus" {
@@ -71,7 +71,7 @@ variable "ATP_private_endpoint" {
 }
 
 variable "ATP_free_tier" {
-  default = true
+  default = false
 }
 
 variable "ATP_database_cpu_core_count" {
