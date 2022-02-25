@@ -29,7 +29,7 @@ def test():
     connection.commit()
     connection.close()
     data = data[2:len(data)-3]
-    final_result = '[' + str(socket.gethostname()) + ']:' + str(data) 
+    final_result = '[' + str(socket.gethostname()) + ']/n' + str(data) + '/n[' + str(socket.gethostname()) + ']:'
     return render_template('index.html', db_data=final_result)
 
 # main

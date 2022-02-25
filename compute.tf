@@ -27,7 +27,7 @@ resource "oci_core_instance" "compute_instance1" {
   #  availability_domain = data.oci_identity_availability_domains.ads.availability_domains[var.availability_domain - 2]["name"]
   availability_domain = var.availability_domain_name
   compartment_id      = var.compartment_ocid
-  display_name        = "Web-Server-1"
+  display_name        = "Rideboard-Web-Server"
   shape               = var.instance_shape
 
   dynamic "shape_config" {
@@ -77,7 +77,7 @@ resource "oci_core_instance_configuration" "instance_configuration" {
 
   depends_on     = [oci_core_image.flask_instance_image, null_resource.compute-script1]
   compartment_id = var.compartment_ocid
-  display_name   = "Instance_Configuration"
+  display_name   = "Rideboard_Instance_Configuration"
   instance_details {
     instance_type = "compute"
     launch_details {
@@ -115,7 +115,7 @@ resource "oci_core_instance_pool" "instance_pool" {
     primary_subnet_id   = oci_core_subnet.subnet_2.id
   }
   size         = "2"
-  display_name = "Instance_Pool"
+  display_name = "Rideboard_Instance_Pool"
   load_balancers {
     backend_set_name = oci_load_balancer_backend_set.lb-bes1.name
     load_balancer_id = oci_load_balancer.lb1.id
@@ -135,7 +135,7 @@ resource "oci_autoscaling_auto_scaling_configuration" "autoscaling_configuration
   }
   compartment_id = var.compartment_ocid
   policies {
-    display_name = "Threshold_AutoScaling_Configuration_Policies"
+    display_name = "Rideboard_Threshold_AutoScaling_Configuration_Policies"
     capacity {
       initial = "2"
       max     = "6"
