@@ -50,6 +50,10 @@ variable "instance_flex_shape_memory" {
   default = 6
 }
 
+variable "instance_custom_image_ocid" {
+  default = "ocid1.image.oc1.ca-toronto-1.aaaaaaaapegzdakcvchu2igunn7idvdocztxm4wdrsmn3l7fubcwta73soza"
+}
+
 variable "ssh_public_key" {
   default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCKThH0Llnr9TtW7sNlm6PuigaKo3A/jWcuijCYxcYeJSZMKnlzm3AUIDUV3iw1u4OkiUGRwLTo2SMNZtnauK/H/rxxz5uq4pDopdAbM7XWmBT+gc0JsDuigj7bzcAAk0pa7GVlnNabika/6M8ETJjgv3yasxCugxfMKFj7LAZxWS2ymnsFmB5y/XubVjrXW4EZuWQcNI+S1QS39XqRkdgWUcsvGq+NGVVe4FjzS/Fx5eKPp+g5UZ7JUrdMAqYQtLAFgdH/OhQHbO1PFqFoI3eKE8NlJdShPLTMuGfrOHrqL1GldneAJrsCO9NGJ2qdfEMfgXgc87Vc9qu6RsFUOBvV rsa-key-20220220"
 }

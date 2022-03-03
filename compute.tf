@@ -42,7 +42,7 @@ resource "oci_core_instance" "compute_instance1" {
 
   source_details {
     source_type             = "image"
-    source_id               = data.oci_core_images.InstanceImageOCID.images[0].id
+    source_id               = var.instance_custom_image_ocid
     boot_volume_size_in_gbs = "50"
   }
 

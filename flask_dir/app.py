@@ -5,7 +5,7 @@ import cx_Oracle
 
 # declare constants for flask app
 HOST = '0.0.0.0'
-PORT = 5000
+PORT = 6000
 
 # initialize flask application
 app = Flask(__name__)

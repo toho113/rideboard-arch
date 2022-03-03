@@ -42,6 +42,20 @@ resource "oci_load_balancer_backend_set" "lb-bes1" {
     timeout_in_millis   = "3000"
     retries             = "3"
   }
+
+# Added Session persistence on LB level
+  lb_cookie_session_persistence_configuration {
+
+    #Optional
+    cookie_name = "X-Oracle-BMC-LBS-Route"
+    disable_fallback = false
+    domain = "rideboard.ddns.net"
+    is_http_only = true
+    is_secure = false
+    # max_age_in_seconds = var.backend_set_lb_cookie_session_persistence_configuration_max_age_in_seconds
+    path = "rideboard.ddns.net/Rideboard"
+  }
+
 }
 
 resource "oci_load_balancer_listener" "lb-listener1" {
