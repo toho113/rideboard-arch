@@ -59,7 +59,7 @@ data "template_file" "sqlnet_ora_template" {
 resource "null_resource" "compute-script1" {
 
   depends_on = [oci_core_instance.compute_instance1, module.oci-adb.adb_database, oci_core_network_security_group_security_rule.ATPSecurityEgressGroupRule, oci_core_network_security_group_security_rule.ATPSecurityIngressGroupRules]
-
+/*
   provisioner "remote-exec" {
     connection {
       type        = "ssh"
@@ -248,5 +248,5 @@ resource "null_resource" "compute-script1" {
     "sudo /tmp/bootstrap.sh"]
   }
 
+*/
 }
-

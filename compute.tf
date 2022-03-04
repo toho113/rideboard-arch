@@ -24,6 +24,7 @@ data "template_cloudinit_config" "cloud_init" {
 # Create Compute Instance
 
 resource "oci_core_instance" "compute_instance1" {
+  depends_on     = [oci_core_subnet.subnet_2]
   #  availability_domain = data.oci_identity_availability_domains.ads.availability_domains[var.availability_domain - 2]["name"]
   availability_domain = var.availability_domain_name
   compartment_id      = var.compartment_ocid
@@ -47,6 +48,7 @@ resource "oci_core_instance" "compute_instance1" {
   }
 
   create_vnic_details {
+    assign_public_ip  = false
     subnet_id = oci_core_subnet.subnet_2.id
     nsg_ids   = [oci_core_network_security_group.WebSecurityGroup.id, oci_core_network_security_group.SSHSecurityGroup.id]
   }
@@ -178,7 +180,8 @@ resource "oci_autoscaling_auto_scaling_configuration" "autoscaling_configuration
 
 # Attaches an instance to an instance pool
 resource "oci_core_instance_pool_instance" "attach_instance_pool_instance" {
-    #Required
-    instance_id = oci_core_instance.compute_instance1.id 
-    instance_pool_id = oci_core_instance_pool.instance_pool.id
+  depends_on     = [oci_core_instance_pool.instance_pool]
+  #Required
+  instance_id = oci_core_instance.compute_instance1.id 
+  instance_pool_id = oci_core_instance_pool.instance_pool.id
 }

@@ -49,11 +49,11 @@ resource "oci_load_balancer_backend_set" "lb-bes1" {
     #Optional
     cookie_name = "X-Oracle-BMC-LBS-Route"
     disable_fallback = false
-    domain = "rideboard.ddns.net"
+#    domain = "rideboard.ddns.net"
     is_http_only = true
     is_secure = false
     # max_age_in_seconds = var.backend_set_lb_cookie_session_persistence_configuration_max_age_in_seconds
-    path = "rideboard.ddns.net/Rideboard"
+#    path = "rideboard.ddns.net/Rideboard"
   }
 
 }
