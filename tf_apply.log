@@ -1,0 +1,13 @@
+ Error: 403-Forbidden 
+│ Provider version: 4.64.0, released on 2022-02-16. This provider is 2 Update(s) behind to current. 
+│ Service: Database Autonomous 
+│ Error Message: Always Free Autonomous Databases do not offer the following features and operations: CPU scaling, storage scaling, storage shrinking, private endpoints, manual backups, restore, preview version software, oracle database edition, oracle service gateway connect, and license updating. Paid Autonomous Database instances cannot be created in a Free-Tier only account. Paid Autonomous Databases cannot be cloned to Always Free instances. 
+│ OPC request ID: b8c882dce23ab4437503ccdbbd31b492/D79EF7004C642F55CE156073190E57D7/2C40C53AF8611935D8F92C43DE859101 
+│ Suggestion: Please retry or contact support for help with service: Database Autonomous
+│ 
+│ 
+│   with module.oci-adb.oci_database_autonomous_database.adb_database,
+│   on .terraform/modules/oci-adb/adb.tf line 9, in resource "oci_database_autonomous_database" "adb_database":
+│    9: resource "oci_database_autonomous_database" "adb_database" {
+│ 
+╵

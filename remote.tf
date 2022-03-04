@@ -248,5 +248,6 @@ resource "null_resource" "compute-script1" {
     "sudo /tmp/bootstrap.sh"]
   }
 
+
 */
 }
