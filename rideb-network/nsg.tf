@@ -19,7 +19,7 @@ resource "oci_core_network_security_group_security_rule" "ATPSecurityEgressGroup
   direction                 = "EGRESS"
   protocol                  = "6"
   #    destination = "10.0.0.0/16"
-  destination      = "10.0.1.0/24"
+  destination      = var.subnet_2_cidr_block
   destination_type = "CIDR_BLOCK"
 }
 
@@ -30,7 +30,7 @@ resource "oci_core_network_security_group_security_rule" "ATPSecurityIngressGrou
   direction                 = "INGRESS"
   protocol                  = "6"
   #    source = "10.0.0.0/16"
-  source      = "10.0.1.0/24"
+  source      = var.subnet_2_cidr_block
   source_type = "CIDR_BLOCK"
   tcp_options {
     destination_port_range {
@@ -65,7 +65,7 @@ resource "oci_core_network_security_group_security_rule" "WebSecurityEgressInter
   network_security_group_id = oci_core_network_security_group.WebSecurityGroup.id
   direction                 = "EGRESS"
   protocol                  = "6"
-  destination               = "10.0.0.0/24"
+  destination               = var.subnet_1_cidr_block
   #    destination = "0.0.0.0/0"
   destination_type = "CIDR_BLOCK"
 }
@@ -76,7 +76,7 @@ resource "oci_core_network_security_group_security_rule" "WebSecurityIngressGrou
   network_security_group_id = oci_core_network_security_group.WebSecurityGroup.id
   direction                 = "INGRESS"
   protocol                  = "6"
-  source                    = "10.0.0.0/24"
+  source                    = var.subnet_1_cidr_block
   #   source = "0.0.0.0/0"
   source_type = "CIDR_BLOCK"
   tcp_options {

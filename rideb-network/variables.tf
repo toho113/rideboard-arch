@@ -17,6 +17,22 @@ variable "release" {
   default     = "1.4.2"
 }
 
+variable "vcn_cidr_block" {
+  default = "10.87.0.0/16"
+}
+
+variable "subnet_1_cidr_block" {
+  default = "10.87.10.0/24"
+}
+
+variable "subnet_2_cidr_block" {
+  default = "10.87.20.0/24"
+}
+
+variable "subnet_3_cidr_block" {
+  default = "10.87.30.0/24"
+}
+
 variable "oracle_instant_client_version" {
   #  default     = "21.1"
   default = "19.10"
