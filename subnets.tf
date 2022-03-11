@@ -4,7 +4,7 @@
 # Create regional subnets in vcn
 
 resource "oci_core_subnet" "subnet_1" {
-  cidr_block      = "10.0.0.0/24"
+  cidr_block      = var.subnet_1_cidr_block
   display_name    = "subnet-pub-LB"
   compartment_id  = var.compartment_ocid
   vcn_id          = oci_core_virtual_network.vcn.id
@@ -19,7 +19,7 @@ resource "oci_core_subnet" "subnet_1" {
 }
 
 resource "oci_core_subnet" "subnet_2" {
-  cidr_block      = "10.0.1.0/24"
+  cidr_block      = var.subnet_2_cidr_block
   display_name    = "subnet-priv-WEBVM"
   compartment_id  = var.compartment_ocid
   vcn_id          = oci_core_virtual_network.vcn.id
@@ -34,7 +34,7 @@ resource "oci_core_subnet" "subnet_2" {
 }
 
 resource "oci_core_subnet" "subnet_3" {
-  cidr_block                 = "10.0.2.0/24"
+  cidr_block                 = var.subnet_3_cidr_block
   display_name               = "subnet-priv-DB"
   compartment_id             = var.compartment_ocid
   vcn_id                     = oci_core_virtual_network.vcn.id

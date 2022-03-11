@@ -25,7 +25,7 @@ data "template_cloudinit_config" "cloud_init" {
 
 resource "oci_core_instance" "compute_instance1" {
   depends_on     = [oci_core_subnet.subnet_2]
-  #  availability_domain = data.oci_identity_availability_domains.ads.availability_domains[var.availability_domain - 2]["name"]
+  # availability_domain = data.oci_identity_availability_domains.ads.availability_domains[var.availability_domain - 2]["name"]
   availability_domain = var.availability_domain_name
   compartment_id      = var.compartment_ocid
   display_name        = "Rideboard-Web-Server"
@@ -44,6 +44,7 @@ resource "oci_core_instance" "compute_instance1" {
   source_details {
     source_type             = "image"
     source_id               = var.instance_custom_image_ocid
+    # source_id               = data.oci_core_images.InstanceImageOCID.images[0].id
     boot_volume_size_in_gbs = "50"
   }
 
@@ -110,6 +111,7 @@ resource "oci_core_instance_configuration" "instance_configuration" {
 # Create Instance Pool
 
 resource "oci_core_instance_pool" "instance_pool" {
+  depends_on = [oci_core_instance_configuration.instance_configuration]
   compartment_id            = var.compartment_ocid
   instance_configuration_id = oci_core_instance_configuration.instance_configuration.id
   placement_configurations {
