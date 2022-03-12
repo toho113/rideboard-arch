@@ -41,6 +41,18 @@ resource "oci_core_instance" "compute_instance1" {
 
   fault_domain = "FAULT-DOMAIN-1"
 
+  agent_config {
+
+    are_all_plugins_disabled = false
+    is_management_disabled   = false
+    is_monitoring_disabled   = false
+
+    plugins_config {
+      desired_state = "ENABLED"
+      name          = "Bastion"
+    }
+  }
+
   source_details {
     source_type             = "image"
     source_id               = var.instance_custom_image_ocid

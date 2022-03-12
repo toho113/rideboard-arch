@@ -140,6 +140,20 @@ variable "ATP_data_guard_enabled" {
   default = false
 }
 
+variable "bastion_name" {
+  default = "ridebbastion"
+}
+
+variable "bastion_bastion_type" {
+  default = "standard"
+}
+
+variable "bastion_client_cidr_block_allow_list" {
+  default = ["0.0.0.0/0"]
+}
+
+
+
 # Dictionary Locals
 locals {
   compute_flexible_shapes = [
