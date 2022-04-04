@@ -12,10 +12,13 @@ variable "ATP_password" {}
 
 variable "availability_domain_name" {}
 
+/*
 variable "release" {
   description = "Reference Architecture Release (OCI Architecture Center)"
   default     = "1.4.2"
 }
+
+*/
 
 variable "vcn_cidr_block" {
   default = "10.87.0.0/16"
