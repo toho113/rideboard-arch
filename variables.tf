@@ -70,7 +70,7 @@ variable "instance_flex_shape_memory" {
 }
 
 variable "instance_custom_image_ocid" {
-  default = "ocid1.image.oc1.ca-toronto-1.aaaaaaaagrnrbssfwnqrqke3qzklcld6gdlvg2kdchy7org5yl3rxn6vqpea"
+  default = "ocid1.image.oc1.us-sanjose-1.aaaaaaaavdvrps3ull3geohu3ce4n35dgzur5mbqcep5gdymjtqvdqusngda"
 }
 
 variable "ssh_public_key" {

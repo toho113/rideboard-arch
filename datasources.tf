@@ -29,3 +29,12 @@ data "oci_identity_region_subscriptions" "home_region_subscriptions" {
     values = [true]
   }
 }
+
+data "oci_core_services" "AllOCIServices" {
+  count = 1
+  filter {
+    name   = "name"
+    values = ["All .* Services In Oracle Services Network"]
+    regex  = true
+  }
+}

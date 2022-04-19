@@ -10,28 +10,28 @@ resource "oci_core_security_list" "node_sec_list" {
 	display_name = "oke-nodeseclist-rideboard-${random_id.tag.hex}"
 	egress_security_rules {
 		description = "Allow pods on one worker node to communicate with pods on other worker nodes"
-		destination = "10.0.10.0/24"
+		destination = var.subnet_2_cidr_block
 		destination_type = "CIDR_BLOCK"
 		protocol = "all"
 		stateless = "false"
 	}
 	egress_security_rules {
 		description = "Access to Kubernetes API Endpoint"
-		destination = "10.0.0.0/28"
+		destination = var.subnet_3_cidr_block
 		destination_type = "CIDR_BLOCK"
 		protocol = "6"
 		stateless = "false"
 	}
 	egress_security_rules {
 		description = "Kubernetes worker to control plane communication"
-		destination = "10.0.0.0/28"
+		destination = var.subnet_3_cidr_block
 		destination_type = "CIDR_BLOCK"
 		protocol = "6"
 		stateless = "false"
 	}
 	egress_security_rules {
 		description = "Path discovery"
-		destination = "10.0.0.0/28"
+		destination = var.subnet_3_cidr_block
 		destination_type = "CIDR_BLOCK"
 		icmp_options {
 			code = "4"
@@ -42,7 +42,7 @@ resource "oci_core_security_list" "node_sec_list" {
 	}
 	egress_security_rules {
 		description = "Allow nodes to communicate with OKE to ensure correct start-up and continued functioning"
-		destination = "all-yyz-services-in-oracle-services-network"
+		destination = lookup(data.oci_core_services.AllOCIServices[0].services[0], "cidr_block")
 		destination_type = "SERVICE_CIDR_BLOCK"
 		protocol = "6"
 		stateless = "false"
@@ -68,7 +68,7 @@ resource "oci_core_security_list" "node_sec_list" {
 	ingress_security_rules {
 		description = "Allow pods on one worker node to communicate with pods on other worker nodes"
 		protocol = "all"
-		source = "10.0.10.0/24"
+		source = var.subnet_2_cidr_block
 		stateless = "false"
 	}
 	ingress_security_rules {
@@ -78,13 +78,13 @@ resource "oci_core_security_list" "node_sec_list" {
 			type = "3"
 		}
 		protocol = "1"
-		source = "10.0.0.0/28"
+		source = var.subnet_3_cidr_block
 		stateless = "false"
 	}
 	ingress_security_rules {
 		description = "TCP access from Kubernetes Control Plane"
 		protocol = "6"
-		source = "10.0.0.0/28"
+		source = var.subnet_3_cidr_block
 		stateless = "false"
 	}
 	ingress_security_rules {
@@ -101,21 +101,21 @@ resource "oci_core_security_list" "kubernetes_api_endpoint_sec_list" {
 	display_name = "oke-k8sApiEndpoint-rideboard-${random_id.tag.hex}"
 	egress_security_rules {
 		description = "Allow Kubernetes Control Plane to communicate with OKE"
-		destination = "all-yyz-services-in-oracle-services-network"
+		destination = lookup(data.oci_core_services.AllOCIServices[0].services[0], "cidr_block")
 		destination_type = "SERVICE_CIDR_BLOCK"
 		protocol = "6"
 		stateless = "false"
 	}
 	egress_security_rules {
 		description = "All traffic to worker nodes"
-		destination = "10.0.10.0/24"
+		destination = var.subnet_2_cidr_block
 		destination_type = "CIDR_BLOCK"
 		protocol = "6"
 		stateless = "false"
 	}
 	egress_security_rules {
 		description = "Path discovery"
-		destination = "10.0.10.0/24"
+		destination = var.subnet_2_cidr_block
 		destination_type = "CIDR_BLOCK"
 		icmp_options {
 			code = "4"
@@ -133,13 +133,13 @@ resource "oci_core_security_list" "kubernetes_api_endpoint_sec_list" {
 	ingress_security_rules {
 		description = "Kubernetes worker to Kubernetes API endpoint communication"
 		protocol = "6"
-		source = "10.0.10.0/24"
+		source = var.subnet_2_cidr_block
 		stateless = "false"
 	}
 	ingress_security_rules {
 		description = "Kubernetes worker to control plane communication"
 		protocol = "6"
-		source = "10.0.10.0/24"
+		source = var.subnet_2_cidr_block
 		stateless = "false"
 	}
 	ingress_security_rules {
@@ -149,7 +149,7 @@ resource "oci_core_security_list" "kubernetes_api_endpoint_sec_list" {
 			type = "3"
 		}
 		protocol = "1"
-		source = "10.0.10.0/24"
+		source = var.subnet_2_cidr_block
 		stateless = "false"
 	}
 	vcn_id = "${oci_core_vcn.generated_oci_core_vcn.id}"
