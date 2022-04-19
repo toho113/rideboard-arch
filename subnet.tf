@@ -26,6 +26,7 @@ resource "oci_core_subnet" "kubernetes_api_endpoint_subnet" {
 	display_name = "oke-k8sApiEndpoint-subnet-rideboard-${random_id.tag.hex}"
 	dns_label = "suba9d3934ba"
 	prohibit_public_ip_on_vnic = "false"
+  #	prohibit_public_ip_on_vnic = "true"
 	route_table_id = "${oci_core_default_route_table.generated_oci_core_default_route_table.id}"
 	security_list_ids = ["${oci_core_security_list.kubernetes_api_endpoint_sec_list.id}"]
 	vcn_id = "${oci_core_vcn.generated_oci_core_vcn.id}"

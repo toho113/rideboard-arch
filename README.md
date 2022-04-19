@@ -1,10 +1,10 @@
 # Rideboard-arch
 
-Autoscaling ensures that your resources in the cloud are utilized efficiently and available when required. You can configure your cloud deployment to automatically adjust the compute resources based on performance metrics, such as CPU utilization. So your end users experience consistent performance even when the load is high. And your costs are proportionately low during periods of low demand.
+This is a Terraform module that deploys infrastruce of Rideboard using Container Engine for Kubernetes (OKE) on Oracle Cloud Infrastructure (OCI).
 
-This reference architecture shows a 3-tier topology consisting of a load balancer (LB), an autoscaling web tier, and a highly available database.
+## About
 
-For details of the architecture, see [_Autoscale a load-balanced web application_](https://docs.oracle.com/en/solutions/autoscale-webapp/index.html)
+Oracle Cloud Infrastructure Container Engine for Kubernetes is a fully-managed, scalable, and highly available service that you can use to deploy your containerized applications to the cloud. Use Container Engine for Kubernetes (sometimes abbreviated to just OKE) when your development team wants to reliably build, deploy, and manage cloud-native applications.
 
 ## Prerequisites
 
@@ -18,3 +18,15 @@ If you don't have the required permissions and quota, contact your tenancy admin
 
 ![](./images/autoscaling.png)
 
+## Terminating SSL/TLS at the Load Balancer (HTTPS)
+
+Please use the following command creates a self-signed certificate, tls.crt, with its corresponding key, tls.key:
+```
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj "/CN=rideboard/O=rideboard"
+```
+Use the following command to create a TLS secret in Kubernetes, whose key and certificate values are set by --key and --cert, respectively.
+```
+kubectl create secret tls ssl-certificate-secret --key tls.key --cert tls.crt
+```
+
+See [Defining Kubernetes Services of Type LoadBalancer](https://docs.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengcreatingloadbalancer.htm)

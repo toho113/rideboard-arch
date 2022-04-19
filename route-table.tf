@@ -9,7 +9,7 @@ resource "oci_core_route_table" "generated_oci_core_route_table" {
 	}
 	route_rules {
 		description = "traffic to OCI services"
-		destination = "all-yyz-services-in-oracle-services-network"
+		destination = lookup(data.oci_core_services.AllOCIServices[0].services[0], "cidr_block")
 		destination_type = "SERVICE_CIDR_BLOCK"
 		network_entity_id = "${oci_core_service_gateway.generated_oci_core_service_gateway.id}"
 	}
