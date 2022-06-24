@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: rideboard
-  replicas: 7 # tells deployment to run 2 pods matching the template
+  replicas: 10 # tells deployment to run 2 pods matching the template
   template:
     metadata:
       labels:
@@ -26,6 +26,7 @@ metadata:
     oci.oraclecloud.com/load-balancer-type: "lb"
     service.beta.kubernetes.io/oci-load-balancer-ssl-ports: "443"
     service.beta.kubernetes.io/oci-load-balancer-tls-secret: ssl-certificate-secret
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   selector:
     app: rideboard

@@ -28,5 +28,7 @@ Use the following command to create a TLS secret in Kubernetes, whose key and ce
 ```
 kubectl create secret tls ssl-certificate-secret --key tls.key --cert tls.crt
 ```
+## Deploy ingress-nginx
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.2/deploy/static/provider/cloud/deploy.yaml
 
 See [Defining Kubernetes Services of Type LoadBalancer](https://docs.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengcreatingloadbalancer.htm)

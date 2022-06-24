@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rideboard-deployment
+spec:
+  selector:
+    matchLabels:
+      app: rideboard
+  replicas: 1 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: rideboard 
+    spec:
+      containers:
+      - name: rideboard 
+        image: incs870/rideboard:arm
+        ports:
+        - containerPort: 5000 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rideboard-service
+  annotations:
+    oci.oraclecloud.com/load-balancer-type: "lb"
+    service.beta.kubernetes.io/oci-load-balancer-ssl-ports: "443"
+    service.beta.kubernetes.io/oci-load-balancer-tls-secret: ssl-certificate-secret
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+spec:
+  selector:
+    app: rideboard
+  ports:
+    - protocol: TCP
+      name: http
+      port: 80
+      targetPort: 5000
+    - protocol: TCP
+      name: https
+      port: 443
+      targetPort: 5000
+  type: LoadBalancer
+#  sessionAffinity: ClientIP
+
+#status:
+#  loadBalancer:
+#    ingress:
+#    - ip: 192.0.2.127
